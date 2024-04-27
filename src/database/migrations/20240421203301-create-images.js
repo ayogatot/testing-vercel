@@ -16,17 +16,18 @@ module.exports = {
           key: 'page_id'
         }
       },
-      url: {
-        type: Sequelize.STRING(128),
+      filename: {
+        type: Sequelize.STRING(36),
       },
-      createdAt: {
+      created_at: {
+        type: Sequelize.BIGINT,
+        defaultValue: new Date().getTime(),
         allowNull: false,
-        type: Sequelize.DATE
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+      updated_at: {
+        type: Sequelize.BIGINT,
+        defaultValue: null,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

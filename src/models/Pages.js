@@ -15,9 +15,11 @@ class Pages extends Model {
         },
         page: {
           type: Sequelize.STRING(64),
+          allowNull: false,
         },
         title: {
           type: Sequelize.STRING(128),
+          allowNull: false,
         },
         subtitle: {
           type: Sequelize.STRING(256),
@@ -29,6 +31,7 @@ class Pages extends Model {
         },
         sequence: {
           type: Sequelize.INTEGER,
+          allowNull: false,
         },
         last_updated_by: {
           type: Sequelize.UUID,
@@ -51,7 +54,7 @@ class Pages extends Model {
         updatedAt: false,
         underscored: true,
         defaultScope: {
-          order: [["created_at", "DESC"]],
+          order: [["sequence", "ASC"]],
         },
       }
     );
@@ -60,9 +63,9 @@ class Pages extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Images, { foreignKey: "page_id" });
-    this.belongsTo(models.User, { foreignKey: "user_id" });
-    this.belongsTo(models.Pages, { foreignKey: "parent_page_id", targetKey: "page_id" });
+    this.hasMany(models.Images, { foreignKey: "page_id", as: "images" });
+    this.belongsTo(models.Pages, { foreignKey: "parent_page_id", as: "parent", constraints: false });
+    this.hasMany(models.Pages, { foreignKey: "parent_page_id", targetKey: "page_id", as: "childs" });
   }
 }
 

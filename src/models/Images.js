@@ -13,8 +13,8 @@ class Images extends Model {
           type: Sequelize.UUID,
           allowNull: true,
         },
-        url: {
-          type: Sequelize.STRING(128),
+        filename: {
+          type: Sequelize.STRING(36),
         },
         created_at: {
           type: Sequelize.BIGINT,
