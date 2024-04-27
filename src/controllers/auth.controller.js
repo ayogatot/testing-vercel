@@ -2,7 +2,7 @@ import { logger } from "express-glass";
 import { ValidationError } from "../utils/ApiError";
 import responseUtil from "../utils/Response";
 import { objectToLogStr } from "../utils/ObjectToLog";
-import userValidator from "../validators/user_validator";
+import userValidator from "../validators/user.validator";
 import userService from "../services/auth.service";
 
 const authController = {};
