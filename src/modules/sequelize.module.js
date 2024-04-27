@@ -7,11 +7,11 @@ const modelFiles = fs
   .readdirSync(__dirname + "/../models/")
   .filter((file) => file.endsWith(".js"));
 
+export const connection = new Sequelize(databaseConfig);
+
 const sequelizeService = {
   init: async () => {
     try {
-      let connection = new Sequelize(databaseConfig);
-     
       for (const file of modelFiles) {
         const model = await import(`../models/${file}`);
         model.default.init(connection);
@@ -24,7 +24,9 @@ const sequelizeService = {
 
       logger().info("[SEQUELIZE] Database service initialized");
     } catch (error) {
-      logger().error("[SEQUELIZE] Error during database service initialization");
+      logger().error(
+        "[SEQUELIZE] Error during database service initialization"
+      );
       throw error;
     }
   },

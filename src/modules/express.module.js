@@ -3,6 +3,7 @@ import express from "express";
 import globalErrorHandler from "../middlewares/errorHandler.middleware";
 import routes from "../routes";
 import compression from "compression";
+import path from 'path'
 
 let server;
 
@@ -13,9 +14,13 @@ const expressService = {
       server.use(compression())
       server.use(express.json());
       server.use(express.urlencoded({ extended: true }));
+      server.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
+      console.log(__dirname)
 
       // Routes
       server.use('/api/v1/auth', routes.authRoutes);
+      server.use('/api/v1/pages', routes.pageRoutes);
 
       server.use(globalErrorHandler);
 
