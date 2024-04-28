@@ -1,3 +1,5 @@
+// import { Op } from 'sequelize';
+
 export default function getPagesQuery(query) {
     const conditions = {};
   
@@ -5,7 +7,11 @@ export default function getPagesQuery(query) {
       conditions.page = query.page;
     }
 
-    conditions.parent_page_id = null
+    if (query.parent_page_id) {
+      conditions.parent_page_id = query.parent_page_id;
+    }
+
+    conditions.parent_page_id = null;
   
     return conditions;
   }

@@ -14,7 +14,7 @@ class Images extends Model {
           allowNull: true,
         },
         filename: {
-          type: Sequelize.STRING(36),
+          type: Sequelize.STRING(40),
         },
         created_at: {
           type: Sequelize.BIGINT,
