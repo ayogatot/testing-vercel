@@ -3,7 +3,7 @@ import sharp from "sharp";
 import { v4 } from "uuid";
 import { logger } from "express-glass";
 import { objectToLogStr } from "../utils/ObjectToLog";
-import { BadRequestError, NotFoundError } from "../utils/ApiError";
+import { BadRequestError } from "../utils/ApiError";
 
 import Pages from "../models/Pages";
 import Images from "../models/Images";
@@ -46,7 +46,7 @@ pageService.getAll = async (query) => {
         {
           model: Images,
           as: "images",
-          attributes: ["image_id", "filename"],
+          // attributes: ["image_id", "filename"],
         },
         {
           model: Pages,
@@ -57,7 +57,7 @@ pageService.getAll = async (query) => {
             {
               model: Images,
               as: "images",
-              attributes: ["image_id", "filename"],
+              // attributes: ["image_id", "filename"],
             }
           ]
         }

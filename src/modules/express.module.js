@@ -16,8 +16,6 @@ const expressService = {
       server.use(express.urlencoded({ extended: true }));
       server.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-      console.log(__dirname)
-
       // Routes
       server.use('/api/v1/auth', routes.authRoutes);
       server.use('/api/v1/pages', routes.pageRoutes);
