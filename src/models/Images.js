@@ -33,9 +33,6 @@ class Images extends Model {
         createdAt: false,
         updatedAt: false,
         underscored: true,
-        defaultScope: {
-          order: [["created_at", "DESC"]],
-        },
       }
     );
 
@@ -43,7 +40,7 @@ class Images extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Pages, { foreignKey: "page_id" });
+    this.belongsTo(models.Pages, { foreignKey: "page_id", as: "page_detail" });
   }
 }
 

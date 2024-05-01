@@ -28,14 +28,7 @@ pageService.add = async (page) => {
         await sharp(curr.buffer)
           .png({ quality: 70 })
           .toFile(path.join(__dirname, "../uploads", filename));
-        return [
-          ...(await acc),
-          {
-            ...curr,
-            page_id: pageId,
-            filename,
-            created_at: new Date().getTime(),
-          },
+        return [ ...(await acc), { ...curr, page_id: pageId, filename, created_at: new Date().getTime() },
         ];
       }, []);
       await Images.bulkCreate(images, { transaction: t });
