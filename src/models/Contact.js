@@ -14,11 +14,11 @@ class Contacts extends Model {
           allowNull: false,
         },
         first_name: {
-          type: Sequelize.STRING(128),
+          type: Sequelize.STRING(64),
           allowNull: false,
         },
         last_name: {
-          type: Sequelize.STRING(128),
+          type: Sequelize.STRING(64),
           allowNull: false,
         },
         phone_number: {

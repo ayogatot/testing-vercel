@@ -33,7 +33,7 @@ imageService.getAll = async (query) => {
     offset: start,
   });
   const totalPage = Math.ceil(totalItems / pageSize);
-  return pagedData( images, totalItems, totalPage, Number(query.pages), totalItems > start + pageSize
+  return pagedData( images, totalItems, totalPage, Number(query.pages || 1), totalItems > start + pageSize
   );
 };
 
