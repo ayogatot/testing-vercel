@@ -21,6 +21,7 @@ const expressService = {
       server.use('/api/v1/pages', routes.pageRoutes);
       server.use('/api/v1/images', routes.imageRoutes);
       server.use('/api/v1/contacts', routes.contactRoutes);
+      server.use('/api/v1/careers', routes.careerRoutes);
 
       server.use(globalErrorHandler);
 
