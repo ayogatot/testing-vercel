@@ -3,6 +3,7 @@ import { authRoutes } from "./auth.routes";
 import { careerRoutes } from "./career.routes";
 import { contactRoutes } from "./contact.routes";
 import { imageRoutes } from "./image.routes";
+import { newsRoutes } from "./news.routes";
 import { pageRoutes } from "./page.routes";
 
 export default {
@@ -11,5 +12,6 @@ export default {
   imageRoutes,
   contactRoutes,
   careerRoutes,
-  applicantRoutes
+  applicantRoutes,
+  newsRoutes
 };
