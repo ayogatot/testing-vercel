@@ -7,6 +7,7 @@ module.exports = {
         page_id: "a0ddbe7f-cd0c-46ef-9c95-184980f7d2ac",
         parent_page_id: null,
         page: "PRODUCT",
+        section: "HERO",
         title: "Our Products",
         subtitle: "Smart Packaging Choices",
         description:

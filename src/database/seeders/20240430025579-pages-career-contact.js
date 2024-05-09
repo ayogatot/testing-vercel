@@ -7,6 +7,7 @@ module.exports = {
         page_id: "9f7b9490-479a-4616-90b0-5f6811cb4e35",
         parent_page_id: null,
         page: "CAREER",
+        section: "HERO",
         title: "Join Our Team",
         subtitle:
           "We are always looking for great talent to be a part of Hasil Raya’s Team",
@@ -20,6 +21,7 @@ module.exports = {
         page_id: "8121b852-d0d5-4a8d-b739-ba1667cfba1b",
         parent_page_id: null,
         page: "CONTACT",
+        section: "MAIN",
         title: "Get in Touch with Us",
         subtitle: "Contact us today to learn more about how we can help you",
         description: null,

@@ -19,6 +19,10 @@ module.exports = {
       page: {
         type: Sequelize.STRING,
       },
+      section: {
+        type: Sequelize.STRING(16),
+        allowNull: true,
+      },
       title: {
         type: Sequelize.STRING(128),
       },

@@ -7,6 +7,7 @@ module.exports = {
         page_id: "b330121b-213d-4d07-bef5-fc89f54c580d",
         parent_page_id: null,
         page: "OVERVIEW",
+        section: "HERO",
         title: "Elevating Plastic Bottle Packaging",
         subtitle: null,
         description:
@@ -19,6 +20,7 @@ module.exports = {
       {
         page_id: "d0592304-eeec-4604-9a45-397e559a2ba4",
         parent_page_id: null,
+        section: "MAIN",
         page: "OVERVIEW",
         title: "Company Overview",
         subtitle: "Your needs",
@@ -32,6 +34,7 @@ module.exports = {
       {
         page_id: "5fb524ee-0c8a-404b-a5f6-31535d414251",
         parent_page_id: null,
+        section: "SOLUTION",
         page: "OVERVIEW",
         title: "Our Solution",
         subtitle: null,
@@ -46,6 +49,7 @@ module.exports = {
         page_id: "c1438683-4179-4a6a-9ed8-e3461f34936b",
         parent_page_id: null,
         page: "OVERVIEW",
+        section: "VISION_MISSION",
         title: "Vision & Mission",
         subtitle: null,
         description: null,
@@ -58,6 +62,7 @@ module.exports = {
         page_id: "0895197d-922b-44b5-b802-b8fbfa231eb2",
         parent_page_id: "c1438683-4179-4a6a-9ed8-e3461f34936b",
         page: "OVERVIEW",
+        section: "VISION",
         title: "Our Vision",
         subtitle: null,
         description:
@@ -71,6 +76,7 @@ module.exports = {
         page_id: "2ebc5080-5d23-4cea-b0a7-d87152117aae",
         parent_page_id: "c1438683-4179-4a6a-9ed8-e3461f34936b",
         page: "OVERVIEW",
+        section: "MISSION",
         title: "Our Mision",
         subtitle: null,
         description:
@@ -84,6 +90,7 @@ module.exports = {
         page_id: "f68f43d5-b6c1-4a22-b6b2-eb929abcb976",
         parent_page_id: null,
         page: "OVERVIEW",
+        section: "MILESTONE",
         title: "Milestone",
         subtitle: null,
         description: null,

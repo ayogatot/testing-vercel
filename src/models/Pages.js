@@ -17,6 +17,10 @@ class Pages extends Model {
           type: Sequelize.STRING(64),
           allowNull: false,
         },
+        section: {
+          type: Sequelize.STRING(16),
+          allowNull: true,
+        },
         title: {
           type: Sequelize.STRING(128),
           allowNull: false,

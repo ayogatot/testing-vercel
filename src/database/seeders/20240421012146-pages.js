@@ -7,6 +7,7 @@ module.exports = {
         page_id: "55db58a5-d8f8-4596-9d57-dfe79c238937",
         parent_page_id: null,
         page: "HOME",
+        section: "HERO",
         title: "To be a leading packaging partner to the industries",
         subtitle: null,
         description:
@@ -20,6 +21,7 @@ module.exports = {
         page_id: "e50266ab-c7d6-446c-8a30-d2738a0a076d",
         parent_page_id: null,
         page: "HOME",
+        section: "MAIN",
         title: "Who are we?",
         subtitle: null,
         description:
@@ -33,6 +35,7 @@ module.exports = {
         page_id: "8247f25e-0f68-498c-b6a8-1e0cd24cd82d",
         parent_page_id: null,
         page: "HOME",
+        section: "PRODUCT",
         title: "Product",
         subtitle: null,
         description: null,
@@ -45,6 +48,7 @@ module.exports = {
         page_id: "6a7830ff-70a8-4e01-b07f-ffc4bc1c0e3a",
         parent_page_id: null,
         page: "HOME",
+        section: "SOLUTION",
         title: "Our Solution",
         subtitle: null,
         description:
@@ -58,6 +62,7 @@ module.exports = {
         page_id: "57e9c4d1-312b-4f9e-9b8d-8066a6a512ef",
         parent_page_id: null,
         page: "HOME",
+        section: "CUSTOMER",
         title: "Our Customer",
         subtitle: null,
         description: null,
@@ -70,6 +75,7 @@ module.exports = {
         page_id: "95a4c210-7968-4e9e-9539-16a115eb1ded",
         parent_page_id: null,
         page: "HOME",
+        section: "BECOME_CUSTOMER",
         title: "Become a customer",
         subtitle: null,
         description:
@@ -83,6 +89,7 @@ module.exports = {
         page_id: "603c96e4-1a97-4fe9-9c50-9f50d7036a24",
         parent_page_id: null,
         page: "HOME",
+        section: "NEWSLETTER",
         title: "Join Our Newsletter",
         subtitle: null,
         description:
