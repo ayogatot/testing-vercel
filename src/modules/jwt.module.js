@@ -1,95 +1,77 @@
-import { logger } from "express-glass";
-import jwt from "jsonwebtoken";
-import moment from "moment";
+import { logger } from 'express-glass'
+import jwt from 'jsonwebtoken'
+import moment from 'moment'
+import responseUtil from '../utils/Response'
 
-let jwtidCounter = 0;
-let blacklist = [];
+let jwtidCounter = 0
+let blacklist = []
 
 const JwtService = {
-  jwtSign: (_payload) => {
-    try {
-      if (process.env.SERVER_JWT !== "true")
-        throw new Error("[JWT] Fastify JWT flag is not setted");
+	jwtSign: (_payload) => {
+		try {
+			if (process.env.SERVER_JWT !== 'true') throw new Error('[JWT] Fastify JWT flag is not setted')
 
-      logger().info("[JWT] Generating fastify JWT sign");
+			logger().info('[JWT] Generating fastify JWT sign')
 
-      const payload = JSON.parse(JSON.stringify(_payload));
+			const payload = JSON.parse(JSON.stringify(_payload))
 
-      jwtidCounter = jwtidCounter + 1;
-      return jwt.sign({ payload }, process.env.SERVER_JWT_SECRET, {
-        expiresIn: Number(process.env.SERVER_JWT_TIMEOUT),
-        jwtid: jwtidCounter + "",
-      });
-    } catch (error) {
-      logger().error("[JWT] Error during fastify JWT sign");
-      throw error;
-    }
-  },
+			jwtidCounter = jwtidCounter + 1
+			return jwt.sign({ payload }, process.env.SERVER_JWT_SECRET, {
+				expiresIn: Number(process.env.SERVER_JWT_TIMEOUT),
+				jwtid: jwtidCounter + '',
+			})
+		} catch (error) {
+			logger().error('[JWT] Error during fastify JWT sign')
+			throw error
+		}
+	},
+	jwtGetToken: (req, res, next) => {
+		try {
+			const auth = req.headers.authorization
+			if (!auth) {
+				throw new Error('Not authorized, headers not provided')
+			}
+			const jwtToken = auth.split(' ')[1]
+			req.auth = jwt.verify(jwtToken, process.env.SERVER_JWT_SECRET)
+			next()
+		} catch (error) {
+			logger().error('[JWT] Error getting JWT token')
+			responseUtil.fail(res, 401, error.message)
+		}
+	},
 
-  jwtGetToken: (request) => {
-    try {
-      if (process.env.SERVER_JWT !== "true")
-        throw new Error("[JWT] JWT flag is not setted");
-      if (
-        !request.headers.authorization ||
-        request.headers.authorization.split(" ")[0] !== "Bearer"
-      )
-        throw new Error("[JWT] JWT token not provided");
+	jwtVerify: (token) => {
+		try {
+			if (process.env.SERVER_JWT !== 'true') throw new Error('[JWT] JWT flag is not setted')
 
-      return request.headers.authorization.split(" ")[1];
-    } catch (error) {
-      logger().error("[JWT] Error getting JWT token");
-      throw error;
-    }
-  },
+			return jwt.verify(token, process.env.SERVER_JWT_SECRET, (err, decoded) => {
+				blacklist.forEach((element) => {
+					if (element.jti === decoded.jti && element.iat === decoded.iat && element.exp === decoded.exp) throw err
+				})
 
-  jwtVerify: (token) => {
-    try {
-      if (process.env.SERVER_JWT !== "true")
-        throw new Error("[JWT] JWT flag is not setted");
+				if (err != null) throw err
+				return decoded.payload
+			})
+		} catch (error) {
+			logger().error('[JWT] Error getting JWT token')
+			throw error
+		}
+	},
 
-      return jwt.verify(
-        token,
-        process.env.SERVER_JWT_SECRET,
-        (err, decoded) => {
-          blacklist.forEach((element) => {
-            if (
-              element.jti === decoded.jti &&
-              element.iat === decoded.iat &&
-              element.exp === decoded.exp
-            )
-              throw err;
-          });
+	jwtBlacklistToken: (token) => {
+		try {
+			while (blacklist.length && moment().diff('1970-01-01 00:00:00Z', 'seconds') > blacklist[0].exp) {
+				logger().info(`[JWT] Removing from blacklist timed out JWT with id ${blacklist[0].jti}`)
+				blacklist.shift()
+			}
+			const { jti, exp, iat } = jwt.decode(token)
+			logger().info(`[JWT] Adding JWT ${token} with id ${jti} to blacklist`)
+			blacklist.push({ jti, exp, iat })
+		} catch (error) {
+			logger().error('[JWT] Error blacklisting fastify JWT token')
+			throw error
+		}
+	},
+}
 
-          if (err != null) throw err;
-          return decoded.payload;
-        }
-      );
-    } catch (error) {
-      logger().error("[JWT] Error getting JWT token");
-      throw error;
-    }
-  },
-
-  jwtBlacklistToken: (token) => {
-    try {
-      while (
-        blacklist.length &&
-        moment().diff("1970-01-01 00:00:00Z", "seconds") > blacklist[0].exp
-      ) {
-        logger().info(
-          `[JWT] Removing from blacklist timed out JWT with id ${blacklist[0].jti}`
-        );
-        blacklist.shift();
-      }
-      const { jti, exp, iat } = jwt.decode(token);
-      logger().info(`[JWT] Adding JWT ${token} with id ${jti} to blacklist`);
-      blacklist.push({ jti, exp, iat });
-    } catch (error) {
-      logger().error("[JWT] Error blacklisting fastify JWT token");
-      throw error;
-    }
-  },
-};
-
-export default JwtService;
+export default JwtService
