@@ -9,16 +9,16 @@ class Absences extends Model {
           primaryKey: true,
           defaultValue: Sequelize.UUIDV4,
         },
-        title: {
+        user_id: {
+          type: Sequelize.UUID,
+          allowNull: false,
+        },
+        latitude: {
           type: Sequelize.STRING(128),
           allowNull: false,
         },
-        job_description: {
-          type: Sequelize.TEXT,
-          allowNull: false,
-        },
-        requirements: {
-          type: Sequelize.TEXT,
+        longitude: {
+          type: Sequelize.STRING(128),
           allowNull: false,
         },
         is_active: {

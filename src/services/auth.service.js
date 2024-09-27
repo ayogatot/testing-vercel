@@ -1,41 +1,50 @@
-import { logger } from "express-glass";
-import { objectToLogStr } from "../utils/ObjectToLog";
-import { DuplicateRecordError, NotFoundError, UnauthorizedError } from "../utils/ApiError";
-import Users from "../models/Users";
-import JwtService from "../modules/jwt.module";
+import { logger } from 'express-glass'
+import { objectToLogStr } from '../utils/ObjectToLog'
+import { DuplicateRecordError, NotFoundError, UnauthorizedError } from '../utils/ApiError'
+import Users from '../models/Users'
+import JwtService from '../modules/jwt.module'
 
-const userService = {};
+const userService = {}
 
 userService.register = async (user) => {
-  logger().info(`add user, user = ${objectToLogStr(user)}`);
-  const existingUser = await Users.findOne({ where: { email: user.email } });
+	logger().info(`add user, user = ${objectToLogStr(user)}`)
+	const existingUser = await Users.findOne({ where: { email: user.email } })
 
-  if (!existingUser) {
-    user.role = "ADMIN";
-    user.created_at = new Date().getTime();
-    const newUser = await Users.create(user);
-    logger().info(`user created, user = ${newUser.id}`);
-    return newUser
-  }
+	if (!existingUser) {
+		user.role = 'ADMIN'
+		user.created_at = new Date().getTime()
+		const newUser = await Users.create(user)
+		logger().info(`user created, user = ${newUser.id}`)
+		return newUser
+	}
 
-  throw new DuplicateRecordError("User already exists");
-};
+	throw new DuplicateRecordError('User already exists')
+}
 
 userService.login = async (body) => {
-  logger().info(`user login, user = ${objectToLogStr(body)}`);
-  const user = await Users.findOne({ where: { email: body.email } });
+	logger().info(`user login, user = ${objectToLogStr(body)}`)
+	const user = await Users.findOne({ where: { email: body.email } })
 
-  if (user) {
-    const isPasswordMatch = await user.checkPassword(body.password);
-    if (isPasswordMatch) {
-      const token = JwtService.jwtSign(user.id);
-      return { user, token };
-    }
+	if (user) {
+		const isPasswordMatch = await user.checkPassword(body.password)
+		if (isPasswordMatch) {
+			const token = JwtService.jwtSign(user.user_id)
+			return { user, token }
+		}
 
-    throw new UnauthorizedError("Password does not match");
-  }
+		throw new UnauthorizedError('Password does not match')
+	}
 
-  throw new NotFoundError("User not found");
-};
+	throw new NotFoundError('User not found')
+}
 
-export default userService;
+userService.getUserById = async (params) => {
+	logger().info(`user by id, user = ${objectToLogStr(params)}`)
+	const user = await Users.findOne({ where: { user_id: params.user_id } })
+
+	if (user) return user
+
+	throw new NotFoundError('User not found')
+}
+
+export default userService

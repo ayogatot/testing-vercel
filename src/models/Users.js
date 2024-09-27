@@ -19,10 +19,8 @@ class Users extends Model {
         password: {
           type: Sequelize.STRING,
         },
-        role: {
-          type: Sequelize.ENUM('SUPER_ADMIN', "ADMIN"),
-          allowNull: false,
-          defaultValue: "ADMIN",
+        phone_number: {
+          type: Sequelize.STRING,
         },
         created_at: {
           type: Sequelize.BIGINT,

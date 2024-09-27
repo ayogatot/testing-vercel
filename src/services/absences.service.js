@@ -3,7 +3,7 @@ import { objectToLogStr } from "../utils/ObjectToLog";
 import Absences from "../models/Absences";
 import pagedData from "../utils/PagedData";
 import { NotFoundError } from "../utils/ApiError";
-import getAbsenceQuery from "../utils/query/absence.query";
+import getAbsenceQuery from "../utils/query/absences.query";
 
 const absenceService = {};
 
@@ -42,10 +42,7 @@ absenceService.update = async (absenceId, absence) => {
     throw new NotFoundError(`absence not found, id = ${absenceId}`);
   }
 
-  existingAbsence.title = absence.title;
-  existingAbsence.job_description = absence.job_description;
-  existingAbsence.requirements = absence.requirements;
-  existingAbsence.is_active = absence.is_active;
+  existingAbsence.is_active = false;
   existingAbsence.updated_at = new Date().getTime();
   await existingAbsence.save();
   logger().info(`absence updated, absence = ${absenceId}`);
