@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const careerValidator = {};
+const absenceValidator = {};
 
 const title = Joi.string().required().messages({
   "string.empty": "title cannot be an empty",
@@ -17,13 +17,13 @@ const requirements = Joi.string().required().messages({
   "any.required": "requirement is required",
 })
 
-careerValidator.add = Joi.object().keys({
+absenceValidator.add = Joi.object().keys({
   title ,
   job_description,
   requirements,
 });
 
-careerValidator.update = Joi.object().keys({
+absenceValidator.update = Joi.object().keys({
   title,
   job_description,
   requirements,
@@ -32,4 +32,4 @@ careerValidator.update = Joi.object().keys({
   }),
 });
 
-export default careerValidator;
+export default absenceValidator;

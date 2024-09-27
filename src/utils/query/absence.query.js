@@ -1,6 +1,6 @@
 // import { Op } from 'sequelize';
 
-export default function getCareerQuery(query) {
+export default function getAbsenceQuery(query) {
     const conditions = {};
 
     if(query.is_active) {

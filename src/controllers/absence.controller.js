@@ -2,8 +2,8 @@ import { logger } from "express-glass";
 import { ValidationError } from "../utils/ApiError";
 import responseUtil from "../utils/Response";
 import { objectToLogStr } from "../utils/ObjectToLog";
-import careerValidator from "../validators/career.validator";
-import careerService from "../services/career.service";
+import careerValidator from "../validators/absence.validator";
+import careerService from "../services/absence.service";
 
 const careerController = {};
 

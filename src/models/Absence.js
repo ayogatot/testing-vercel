@@ -1,10 +1,10 @@
 import Sequelize, { Model } from "sequelize";
 
-class Careers extends Model {
+class Absences extends Model {
   static init(sequelize) {
     super.init(
       {
-        career_id: {
+        absence_id: {
           type: Sequelize.UUID,
           primaryKey: true,
           defaultValue: Sequelize.UUIDV4,
@@ -38,8 +38,8 @@ class Careers extends Model {
       },
       {
         sequelize,
-        modelName: "Careers",
-        tableName: "careers",
+        modelName: "Absences",
+        tableName: "absences",
         createdAt: false,
         updatedAt: false,
         underscored: true,
@@ -55,4 +55,4 @@ class Careers extends Model {
   static associate(models) {}
 }
 
-export default Careers;
+export default Absences;
