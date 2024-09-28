@@ -1,6 +1,6 @@
 # Training Backend
 
-Using mysql and sequelize as orm
+Using mysql and sequelize as orm .
 
 ## Getting Started
 
