@@ -26,6 +26,7 @@ authController.register = async (req, res, next) => {
 authController.login = async (req, res, next) => {
 	try {
 		logger().info(`user login request, data = ${objectToLogStr(req.body)}`)
+		logger().info(req.body)
 		const validationResult = userValidator.login.validate(req.body)
 		logger().error(validationResult)
 		if (validationResult.error) {
