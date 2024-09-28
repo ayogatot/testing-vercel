@@ -18,6 +18,9 @@ const expressService = {
 			server.use(express.urlencoded({ extended: true }))
 			server.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
+			// Base URL
+			server.get('/', (req, res) => res.send('Hello World'))
+
 			// Routes
 			server.use('/api/v1/auth', routes.authRoutes)
 			server.use('/api/v1/absences', routes.absencesRoutes)
