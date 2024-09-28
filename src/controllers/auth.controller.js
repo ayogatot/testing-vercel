@@ -27,13 +27,17 @@ authController.login = async (req, res, next) => {
 	try {
 		logger().info(`user login request, data = ${objectToLogStr(req.body)}`)
 		const validationResult = userValidator.login.validate(req.body)
+		logger().error(validationResult)
 		if (validationResult.error) {
+			logger().error(validationResult.error.message)
 			throw new ValidationError(validationResult.error.message)
 		}
 
 		const result = await userService.login(validationResult.value)
+		logger().error(result)
 		responseUtil.success(res, result)
 	} catch (e) {
+		logger().error(e)
 		logger().error(`user login failed, error = ${e}`)
 		next(e)
 	}
@@ -45,7 +49,7 @@ authController.getUserById = async (req, res, next) => {
 		const result = await userService.getUserById(req.params)
 		responseUtil.success(res, result)
 	} catch (e) {
-		logger().error(`absence login failed, error = ${e}`)
+		logger().error(`get user by id request failed, error = ${e}`)
 		next(e)
 	}
 }
