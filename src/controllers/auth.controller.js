@@ -31,7 +31,7 @@ authController.login = async (req, res, next) => {
 		// 	throw new ValidationError(validationResult.error.message)
 		// }
 
-		const result = await userService.login(validationResult.value)
+		const result = await userService.login(req.body)
 		responseUtil.success(res, result)
 	} catch (e) {
 		logger().error(`user login failed, error = ${e}`)
