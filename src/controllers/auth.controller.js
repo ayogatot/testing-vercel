@@ -26,10 +26,10 @@ authController.register = async (req, res, next) => {
 authController.login = async (req, res, next) => {
 	try {
 		logger().info(`user login request, data = ${objectToLogStr(req.body)}`)
-		const validationResult = userValidator.login.validate(req.body)
-		if (validationResult.error) {
-			throw new ValidationError(validationResult.error.message)
-		}
+		// const validationResult = userValidator.login.validate(req.body)
+		// if (validationResult.error) {
+		// 	throw new ValidationError(validationResult.error.message)
+		// }
 
 		const result = await userService.login(validationResult.value)
 		responseUtil.success(res, result)
