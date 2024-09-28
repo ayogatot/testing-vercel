@@ -1,5 +1,4 @@
 import { logger } from "express-glass";
-import { ValidationError } from "../utils/ApiError";
 import responseUtil from "../utils/Response";
 import { objectToLogStr } from "../utils/ObjectToLog";
 import absenceValidator from "../validators/absences.validator";
@@ -23,7 +22,7 @@ absenceController.add = async (req, res, next) => {
     logger().info(`absence add request, data = ${objectToLogStr(req.body)}`)
     const validationResult = absenceValidator.add.validate(req.body)
     if (validationResult.error) {
-      throw new ValidationError(validationResult.error.message)
+      throw Error(validationResult.error.message)
     }
 
     const absence = await absenceService.add(validationResult.value);
