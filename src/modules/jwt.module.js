@@ -9,7 +9,7 @@ let blacklist = []
 const JwtService = {
 	jwtSign: (_payload) => {
 		try {
-			if (process.env.SERVER_JWT !== 'true') throw new Error('[JWT] Fastify JWT flag is not setted')
+			if (process.env.SERVER_JWT !== 'true') throw  Error('[JWT] Fastify JWT flag is not setted')
 
 			logger().info('[JWT] Generating fastify JWT sign')
 
@@ -29,7 +29,7 @@ const JwtService = {
 		try {
 			const auth = req.headers.authorization
 			if (!auth) {
-				throw new Error('Not authorized, headers not provided')
+				throw  Error('Not authorized, headers not provided')
 			}
 			const jwtToken = auth.split(' ')[1]
 			req.auth = jwt.verify(jwtToken, process.env.SERVER_JWT_SECRET)
@@ -42,7 +42,7 @@ const JwtService = {
 
 	jwtVerify: (token) => {
 		try {
-			if (process.env.SERVER_JWT !== 'true') throw new Error('[JWT] JWT flag is not setted')
+			if (process.env.SERVER_JWT !== 'true') throw  Error('[JWT] JWT flag is not setted')
 
 			return jwt.verify(token, process.env.SERVER_JWT_SECRET, (err, decoded) => {
 				blacklist.forEach((element) => {

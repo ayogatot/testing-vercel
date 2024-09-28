@@ -18,7 +18,7 @@ userService.register = async (user) => {
 		return newUser
 	}
 
-	throw new DuplicateRecordError('User already exists')
+	throw DuplicateRecordError('User already exists')
 }
 
 userService.login = async (body) => {
@@ -32,10 +32,10 @@ userService.login = async (body) => {
 			return { user, token }
 		}
 
-		throw new UnauthorizedError('Password does not match')
+		throw UnauthorizedError('Password does not match')
 	}
 
-	throw new NotFoundError('User not found')
+	throw NotFoundError('User not found')
 }
 
 userService.getUserById = async (params) => {
@@ -44,7 +44,7 @@ userService.getUserById = async (params) => {
 
 	if (user) return user
 
-	throw new NotFoundError('User not found')
+	throw NotFoundError('User not found')
 }
 
 export default userService
