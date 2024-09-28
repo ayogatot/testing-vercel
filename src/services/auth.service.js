@@ -1,4 +1,5 @@
 import { logger } from 'express-glass'
+import { DuplicateRecordError, UnauthorizedError, NotFoundError } from '../utils/ApiError'
 import { objectToLogStr } from '../utils/ObjectToLog'
 import Users from '../models/Users'
 import JwtService from '../modules/jwt.module'
@@ -17,7 +18,7 @@ userService.register = async (user) => {
 		return newUser
 	}
 
-	throw new Error('User already exists')
+	throw new DuplicateRecordError('User already exists')
 }
 
 userService.login = async (body) => {
@@ -31,10 +32,10 @@ userService.login = async (body) => {
 			return { user, token }
 		}
 
-		throw new Error('Password does not match')
+		throw new UnauthorizedError('Password does not match')
 	}
 
-	throw new Error('User not found')
+	throw new NotFoundError('User not found')
 }
 
 userService.getUserById = async (params) => {
@@ -43,7 +44,7 @@ userService.getUserById = async (params) => {
 
 	if (user) return user
 
-	throw new Error('User not found')
+	throw new NotFoundError('User not found')
 }
 
 export default userService

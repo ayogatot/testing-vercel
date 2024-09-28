@@ -1,4 +1,5 @@
 import { logger } from 'express-glass'
+import { ValidationError } from '../utils/ApiError'
 import responseUtil from '../utils/Response'
 import { objectToLogStr } from '../utils/ObjectToLog'
 import userValidator from '../validators/user.validator'
@@ -11,7 +12,7 @@ authController.register = async (req, res, next) => {
 		logger().info(`user registration request, data = ${objectToLogStr(req.body)}`)
 		const validationResult = userValidator.register.validate(req.body)
 		if (validationResult.error) {
-			throw Error(validationResult.error.message)
+			throw new ValidationError(validationResult.error.message)
 		}
 
 		const user = await userService.register(validationResult.value)
@@ -27,7 +28,7 @@ authController.login = async (req, res, next) => {
 		logger().info(`user login request, data = ${objectToLogStr(req.body)}`)
 		const validationResult = userValidator.login.validate(req.body)
 		if (validationResult.error) {
-			throw Error(validationResult.error.message)
+			throw new ValidationError(validationResult.error.message)
 		}
 
 		const result = await userService.login(validationResult.value)
