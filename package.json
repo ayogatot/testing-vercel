@@ -19,7 +19,7 @@
 		"dotenv": "^16.0.1",
 		"express": "^4.19.2",
 		"express-glass": "^1.0.0",
-		"joi": "^17.12.3",
+		"joi": "^17.13.3",
 		"jsonwebtoken": "^9.0.0",
 		"moment": "^2.29.3",
 		"multer": "^1.4.5-lts.1",
