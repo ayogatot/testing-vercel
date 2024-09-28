@@ -1,4 +1,4 @@
-# HRI Backend
+# Training Backend
 
 Using mysql and sequelize as orm
 
@@ -16,21 +16,26 @@ Create database (if not exist)
 yarn sequelize db:create
 ```
 
-Migrate table 
+Migrate table
+
 ```
 yarn sequelize db:migrate
 ```
 
-Seed 
+Seed
+
 ```
 yarn sequelize db:seed:all
 ```
 
 Start project
+
 ```
 yarn dev
 ```
+
 or
+
 ```
 yarn start
 ```
