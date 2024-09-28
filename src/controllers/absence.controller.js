@@ -23,7 +23,7 @@ absenceController.add = async (req, res, next) => {
     logger().info(`absence add request, data = ${objectToLogStr(req.body)}`)
     const validationResult = absenceValidator.add.validate(req.body)
     if (validationResult.error) {
-      throw ValidationError(validationResult.error.message)
+      throw new ValidationError(validationResult.error.message)
     }
 
     const absence = await absenceService.add(validationResult.value);

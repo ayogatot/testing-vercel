@@ -39,7 +39,7 @@ absenceService.update = async (absenceId, absence) => {
   const existingAbsence = await Absences.findOne({ where: { absence_id: absenceId } });
 
   if (!existingAbsence) {
-    throw  NotFoundError(`absence not found, id = ${absenceId}`);
+    throw new NotFoundError(`absence not found, id = ${absenceId}`);
   }
 
   existingAbsence.is_active = false;
