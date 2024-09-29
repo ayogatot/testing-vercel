@@ -1,5 +1,5 @@
-import { authRoutes } from './auth.routes'
-import { absencesRoutes } from './absence.routes'
+import { authRoutes } from './auth.routes.js'
+import { absencesRoutes } from './absence.routes.js'
 
 export default {
 	authRoutes,

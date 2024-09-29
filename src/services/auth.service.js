@@ -1,20 +1,20 @@
-import { logger } from 'express-glass'
-import { DuplicateRecordError, UnauthorizedError, NotFoundError } from '../utils/ApiError'
-import { objectToLogStr } from '../utils/ObjectToLog'
-import Users from '../models/Users'
-import JwtService from '../modules/jwt.module'
+
+import { DuplicateRecordError, UnauthorizedError, NotFoundError } from '../utils/ApiError.js'
+import { objectToLogStr } from '../utils/ObjectToLog.js'
+import Users from '../models/Users.js'
+import JwtService from '../modules/jwt.module.js'
 
 const userService = {}
 
 userService.register = async (user) => {
-	logger().info(`add user, user = ${objectToLogStr(user)}`)
+	console.log(`add user, user = ${objectToLogStr(user)}`)
 	const existingUser = await Users.findOne({ where: { email: user.email } })
 
 	if (!existingUser) {
 		user.role = 'ADMIN'
 		user.created_at = new Date().getTime()
 		const newUser = await Users.create(user)
-		logger().info(`user created, user = ${newUser.id}`)
+		console.log(`user created, user = ${newUser.id}`)
 		return newUser
 	}
 
@@ -22,7 +22,7 @@ userService.register = async (user) => {
 }
 
 userService.login = async (body) => {
-	logger().info(`user login, user = ${objectToLogStr(body)}`)
+	console.log(`user login, user = ${objectToLogStr(body)}`)
 	const user = await Users.findOne({ where: { email: body.email } })
 
 	if (user) {
@@ -39,7 +39,7 @@ userService.login = async (body) => {
 }
 
 userService.getUserById = async (params) => {
-	logger().info(`user by id, user = ${objectToLogStr(params)}`)
+	console.log(`user by id, user = ${objectToLogStr(params)}`)
 	const user = await Users.findOne({ where: { user_id: params.user_id } })
 
 	if (user) return user

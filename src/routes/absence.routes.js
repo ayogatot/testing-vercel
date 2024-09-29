@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import JwtService from '../modules/jwt.module'
-import absenceController from '../controllers/absence.controller'
+import JwtService from '../modules/jwt.module.js'
+import absenceController from '../controllers/absence.controller.js'
 
 const absencesRoutes = Router()
 

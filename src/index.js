@@ -2,15 +2,18 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-import { logger } from 'express-glass'
-import sequelizeModule from './modules/sequelize.module'
-
 import path from 'path'
 import cors from 'cors'
 import express from 'express'
 import compression from 'compression'
-import routes from './routes'
-import globalErrorHandler from './middlewares/errorHandler.middleware'
+import routes from './routes/index.js'
+import globalErrorHandler from './middlewares/errorHandler.middleware.js'
+import sequelizeModule from './modules/sequelize.module.js'
+
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const server = express()
 server.use(compression())
@@ -33,15 +36,15 @@ server.listen(process.env.SERVER_PORT, async () => {
 	try {
 		await sequelizeModule.init()
 
-		logger().info('🚀 Server initialized successfully')
+		console.log('🚀 Server initialized successfully')
 	} catch (error) {
-		logger().error(error)
+		console.error(error)
 		process.exit(1)
 	}
 })
-logger().info('[EXPRESS] Express initialized')
+console.log('[EXPRESS] Express initialized')
 
-module.exports = server
+export default server
 
 // (async () => {
 //   try {
@@ -49,9 +52,9 @@ module.exports = server
 //       await module.init();
 //     }
 
-//     logger().info("🚀 Server initialized successfully");
+//     console.log("🚀 Server initialized successfully");
 //   } catch (error) {
-//     logger().error(error);
+//     console.error(error);
 //     process.exit(1);
 //   }
 // })();

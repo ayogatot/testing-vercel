@@ -1,7 +1,7 @@
-import { logger } from 'express-glass'
+
 import jwt from 'jsonwebtoken'
 import moment from 'moment'
-import responseUtil from '../utils/Response'
+import responseUtil from '../utils/Response.js'
 
 let jwtidCounter = 0
 let blacklist = []
@@ -11,7 +11,7 @@ const JwtService = {
 		try {
 			if (process.env.SERVER_JWT !== 'true') throw Error('[JWT] Fastify JWT flag is not setted')
 
-			logger().info('[JWT] Generating fastify JWT sign')
+			console.log('[JWT] Generating fastify JWT sign')
 
 			const payload = JSON.parse(JSON.stringify(_payload))
 
@@ -21,7 +21,7 @@ const JwtService = {
 				jwtid: jwtidCounter + '',
 			})
 		} catch (error) {
-			logger().error('[JWT] Error during fastify JWT sign')
+			console.error('[JWT] Error during fastify JWT sign')
 			throw error
 		}
 	},
@@ -35,7 +35,7 @@ const JwtService = {
 			req.auth = jwt.verify(jwtToken, process.env.SERVER_JWT_SECRET)
 			next()
 		} catch (error) {
-			logger().error('[JWT] Error getting JWT token')
+			console.error('[JWT] Error getting JWT token')
 			responseUtil.fail(res, 401, error.message)
 		}
 	},
@@ -53,7 +53,7 @@ const JwtService = {
 				return decoded.payload
 			})
 		} catch (error) {
-			logger().error('[JWT] Error getting JWT token')
+			console.error('[JWT] Error getting JWT token')
 			throw error
 		}
 	},
@@ -61,14 +61,14 @@ const JwtService = {
 	jwtBlacklistToken: (token) => {
 		try {
 			while (blacklist.length && moment().diff('1970-01-01 00:00:00Z', 'seconds') > blacklist[0].exp) {
-				logger().info(`[JWT] Removing from blacklist timed out JWT with id ${blacklist[0].jti}`)
+				console.log(`[JWT] Removing from blacklist timed out JWT with id ${blacklist[0].jti}`)
 				blacklist.shift()
 			}
 			const { jti, exp, iat } = jwt.decode(token)
-			logger().info(`[JWT] Adding JWT ${token} with id ${jti} to blacklist`)
+			console.log(`[JWT] Adding JWT ${token} with id ${jti} to blacklist`)
 			blacklist.push({ jti, exp, iat })
 		} catch (error) {
-			logger().error('[JWT] Error blacklisting fastify JWT token')
+			console.error('[JWT] Error blacklisting fastify JWT token')
 			throw error
 		}
 	},

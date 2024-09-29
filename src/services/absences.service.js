@@ -1,14 +1,14 @@
-import { logger } from "express-glass";
-import { objectToLogStr } from "../utils/ObjectToLog";
-import Absences from "../models/Absences";
-import pagedData from "../utils/PagedData";
-import { NotFoundError } from "../utils/ApiError";
-import getAbsenceQuery from "../utils/query/absences.query";
+;
+import { objectToLogStr } from "../utils/ObjectToLog.js";
+import Absences from "../models/Absences.js";
+import pagedData from "../utils/PagedData.js";
+import { NotFoundError } from "../utils/ApiError.js";
+import getAbsenceQuery from "../utils/query/absences.query.js";
 
 const absenceService = {};
 
 absenceService.getAll = async (query) => {
-  logger().info(`get all absence, with query = ${objectToLogStr(query)}`);
+  console.log(`get all absence, with query = ${objectToLogStr(query)}`);
   const pageSize = 12;
   const start = query.pages ? query.pages * pageSize - pageSize : null;
   const { rows: absences, count: totalItems } = await Absences.findAndCountAll({
@@ -17,24 +17,24 @@ absenceService.getAll = async (query) => {
     offset: start,
   });
   const totalPage = Math.ceil(totalItems / pageSize);
-  logger().info("sucessfully get all absences");
+  console.log("sucessfully get all absences");
 
   return pagedData(absences, totalItems, totalPage, Number(query.pages || 1), totalItems > start + pageSize);
 };
 
 absenceService.add = async (absence) => {
-  logger().info(`add absence, absence = ${objectToLogStr(absence)}`);
+  console.log(`add absence, absence = ${objectToLogStr(absence)}`);
 
   absence.is_active = true;
   absence.created_at = new Date().getTime();
   const newAbsence = await Absences.create(absence);
-  logger().info(`absence created, absence = ${newAbsence.id}`);
+  console.log(`absence created, absence = ${newAbsence.id}`);
 
   return newAbsence;
 };
 
 absenceService.update = async (absenceId, absence) => {
-  logger().info(`update absence, absence = ${objectToLogStr(absence)}`);
+  console.log(`update absence, absence = ${objectToLogStr(absence)}`);
 
   const existingAbsence = await Absences.findOne({ where: { absence_id: absenceId } });
 
@@ -45,7 +45,7 @@ absenceService.update = async (absenceId, absence) => {
   existingAbsence.is_active = false;
   existingAbsence.updated_at = new Date().getTime();
   await existingAbsence.save();
-  logger().info(`absence updated, absence = ${absenceId}`);
+  console.log(`absence updated, absence = ${absenceId}`);
 
   return existingAbsence;
 };

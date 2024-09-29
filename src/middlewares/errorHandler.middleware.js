@@ -1,13 +1,12 @@
-import { Request, Response, NextFunction } from 'express';
-import { IsApiError, ApiError } from '../utils/ApiError';
-import responseUtil from '../utils/Response';
+import { request, response } from 'express';
+import { IsApiError, ApiError } from '../utils/ApiError.js';
+import responseUtil from '../utils/Response.js';
 const currentEnv = process.env.NODE_ENV || 'development';
 /**
  * Global error handler for all routes
  * @param {ApiError} err
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
+ * @param {request} req
+ * @param {response} res
  */
 export default (err, _req, res, next) => {
   if (res.headersSent) return next(err);

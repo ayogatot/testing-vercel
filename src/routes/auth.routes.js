@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import JwtService from '../modules/jwt.module'
-import authController from '../controllers/auth.controller'
+import JwtService from '../modules/jwt.module.js'
+import authController from '../controllers/auth.controller.js'
 
 const authRoutes = Router()
 

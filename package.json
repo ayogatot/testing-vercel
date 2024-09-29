@@ -4,6 +4,7 @@
 	"main": "index.js",
 	"author": "ayogatot <azerino25@gmail.com>",
 	"license": "MIT",
+	"type": "module",
 	"scripts": {
 		"dev": "nodemon src/index.js",
 		"start": "node src/index.js",
@@ -18,7 +19,6 @@
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.1",
 		"express": "^4.19.2",
-		"express-glass": "^1.0.0",
 		"joi": "^17.13.3",
 		"jsonwebtoken": "^9.0.0",
 		"moment": "^2.29.3",
@@ -30,6 +30,7 @@
 		"yup": "^1.0.0"
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.25.4",
 		"nodemon": "^2.0.18",
 		"sequelize-cli": "^6.4.1",
 		"sucrase": "^3.23.0"
