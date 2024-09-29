@@ -1,5 +1,5 @@
-import mysql2 from 'mysql2'
-require('dotenv/config')
+const mysql2 = require('mysql2');
+require('dotenv/config');
 
 module.exports = {
 	dialect: process.env.DB_DIALECT,
