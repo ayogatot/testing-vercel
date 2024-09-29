@@ -15,5 +15,10 @@
         "Access-Control-Allow-Origin": "*"
       }
     }
-  ]
+  ],
+  "functions": {
+    "src/index.js": {
+      "maxDuration": 10
+    }
+  }
 }

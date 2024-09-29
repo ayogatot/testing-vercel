@@ -31,8 +31,7 @@ server.use('/api/v1/absences', routes.absencesRoutes)
 
 server.use(globalErrorHandler)
 
-// FOR VERCEL REQUIREMENTS
-server.listen(process.env.SERVER_PORT, async () => {
+const initSequelize = async () => {
 	try {
 		await sequelizeModule.init()
 
@@ -41,8 +40,12 @@ server.listen(process.env.SERVER_PORT, async () => {
 		console.error(error)
 		process.exit(1)
 	}
-})
-console.log('[EXPRESS] Express initialized')
+}
+
+initSequelize();
+
+// FOR VERCEL REQUIREMENTS
+server.listen(process.env.SERVER_PORT, () => console.log('[EXPRESS] Express initialized'))
 
 export default server
 
