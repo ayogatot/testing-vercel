@@ -9,12 +9,8 @@ const absenceService = {};
 
 absenceService.getAll = async (query) => {
   console.log(`get all absence, with query = ${objectToLogStr(query)}`);
-  const pageSize = 12;
-  const start = query.pages ? query.pages * pageSize - pageSize : null;
   const { rows: absences, count: totalItems } = await Absences.findAndCountAll({
     where: getAbsenceQuery(query),
-    limit: pageSize,
-    offset: start,
   });
   const totalPage = Math.ceil(totalItems / pageSize);
   console.log("sucessfully get all absences");
